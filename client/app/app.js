@@ -5,11 +5,13 @@ angular.module('tgPluginApp', [
   'ngResource',
   'ngSanitize',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'perfect_scrollbar'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');
-
     $locationProvider.html5Mode(false);
+  }).config(function(){
+    
   });

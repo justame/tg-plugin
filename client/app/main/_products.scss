@@ -1,0 +1,15 @@
+.products{
+  border: solid 1px #000;
+  
+  .product{
+    .product-image{
+      width: 92px;
+      height: 96px;
+      box-shadow: 0 0 1px 1px #CCC;
+      img{
+        max-width:  100%;
+      }
+    }
+  }
+}
+
