@@ -1,24 +1,35 @@
 .main-container
   .container
-    .row
-      .col-md-6
-        img("src" = "https://s-media-cache-ak0.pinimg.com/236x/ac/46/0a/ac460aeb3bd90d176386fa09e84a2601.jpg")
-      .col-md-6
-        | Products:
-        .tab
-          a(href = "#" ng-click = "mainCtrl.setFilter('pants')").
-            Pants
+    .product-similar-dialog-container
+      .row
+        .col-md-6
+          .main-product-image
+            img("src" = "http://www.razorfine.com/wp-content/uploads/2013/02/nina-agdal-sports-illustrated-2013-20.jpg")
+        .col-md-6
+          .categories-container
+            .tabs
+              a.tab(href = "#" ng-click = "mainCtrl.setFilter('pants')").
+                Pants
 
-          a(href = "#" ng-click = "mainCtrl.setFilter('shirts')").
-            Shirts
+              a.tab(href = "#" ng-click = "mainCtrl.setFilter('shirts')").
+                Shirts
 
-          a(href = "#" ng-click = "mainCtrl.setFilter('acessories')").
-            Accessories
-        perfect-scrollbar.products(class="scroller" wheel-propagation="true" wheel-speed="1" min-scrollbar-length="2")
-          ul
-            li.product(ng-repeat = "product in mainCtrl.getProductsByCurrentFilter() track by $index")
-              .product-image
-                img(ng-src = "{{product.imageUrl}}")
-              
+              a.tab(href = "#" ng-click = "mainCtrl.setFilter('acessories')").
+                Accessories
+          perfect-scrollbar.products(class="scroller" wheel-propagation="true" wheel-speed="1" min-scrollbar-length="2")
+            ul
+              li.product(ng-repeat = "product in mainCtrl.getProductsByCurrentFilter() track by $index")
+                span.product-image
+                  img(ng-src = "{{product.imageUrl}}")
+
+                .product-price
+                  $123
+                p.product-description
+                  |AESOS
+                  br
+                  |Urban Outfitters
+
+
+                
 
 

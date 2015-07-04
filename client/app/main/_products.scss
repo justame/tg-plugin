@@ -1,14 +1,28 @@
 .products{
-  border: solid 1px #000;
   
   .product{
+    @include clearfix;
+    margin-bottom: 20px;
+    padding: 5px;
+    
+
     .product-image{
+      display: inline-block;
       width: 92px;
       height: 96px;
-      box-shadow: 0 0 1px 1px #CCC;
+      float: left;
+      margin-right: 40px;
       img{
         max-width:  100%;
       }
+    }
+
+    .product-price{
+      color: #ff0000;
+      font-size: 20px;
+    }
+    .product-description{
+      font-size: 20px;
     }
   }
 }

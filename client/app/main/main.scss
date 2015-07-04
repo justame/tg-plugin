@@ -1,3 +1,30 @@
 .main-container{
+  .product-similar-dialog-container{
+    width: 900px;
+  }
+
+  .categories-container{
+    background: #181007;
+    height: 68px;
+    padding-left: 32px;
+  }
+
+  .tabs{
+    line-height: 68px;
+    .tab{
+      display: inline-block;
+      color:  #ffffff;
+      font-size: 22px;
+      font-weight: 400;
+      margin-right: 22px;
+    }
+  }
+
   @import "products";
+  
+  .main-product-image{
+    img{
+      max-width: 100%;
+    }
+  }
 }
