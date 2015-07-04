@@ -13,7 +13,10 @@ angular.module('tgPluginApp')
       $http.get(url).then(function(response){
         // defer.resolve(response.data);
         defer.resolve(window.products);
-      })
+      });
       return defer.promise;
     };
   });
+
+
+
