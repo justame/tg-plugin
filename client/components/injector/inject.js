@@ -43,15 +43,15 @@
 
 
 
-        // function init() {
-        //     var images = that.getImages(imageRegion.selector);
+        function init() {
+            var images = that.getImages(imageRegion.selector);
 
-        //     images.each(function(index, image) {
-        //         that.attachTag(image, imageRegion.attachType);
-        //     });
-        // }
+            images.each(function(index, image) {
+                that.attachTag(image, imageRegion.attachType);
+            });
+        }
 
-        //init();
+        init();
     }
 
 
