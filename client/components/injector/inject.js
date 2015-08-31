@@ -2,6 +2,8 @@
 (function($) {
     'use strict';
 
+    var API = 'https://extremeli.trendi.guru/api/images';
+
     var imageRegions = [{
         selector: '.teaser-list.teaser-list-of-04_top_high_text',
         attachType: 'static'
@@ -39,33 +41,42 @@
             return $(imageRegion.selector).find('img');
         };
 
-        function init() {
-            var images = that.getImages(imageRegion.selector);
 
-            images.each(function(index, image) {
-                that.attachTag(image, imageRegion.attachType);
-            });
-        }
 
-        init();
+        // function init() {
+        //     var images = that.getImages(imageRegion.selector);
+
+        //     images.each(function(index, image) {
+        //         that.attachTag(image, imageRegion.attachType);
+        //     });
+        // }
+
+        //init();
     }
 
 
     function Tag(image, attachType) {
         var imageLoaded = false;
+        var imageExistsInDB = false;
 
         function onImageReady() {
             imageLoaded = true;
             log($(image).get(0).src);
-
             var tag = $(generateTagTemplate());
+
             if (isImageValid()) {
-                positionTagToImage(tag, image);
-                tag.click(function(e) {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    onTagClick(image);
-                });
+                $.getJSON(API, {exists:1, imageUrl: image.src}).done(
+                    function(data){
+                        imageExistsInDB = data.hasOwnProperty('exists') && data.exists;
+                        if(imageExistsInDB){
+                            positionTagToImage(tag, image);
+                            tag.click(function(e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                onTagClick(image);
+                            });
+                        }
+                    });
             }
         }
 
@@ -73,12 +84,7 @@
             var width = $(image).width();
             var height = $(image).height();
             var imageRegion = $(image).data('imageRegion');
-
-            if ((width >= imageRegion.minImageWidth) && (height >= imageRegion.minImageHeight)) {
-                return true;
-            } else {
-                return false;
-            }
+            return (width >= imageRegion.minImageWidth) && (height >= imageRegion.minImageHeight);    
         }
 
         function onTagClick(image) {
@@ -110,10 +116,12 @@
         }
 
         function generateTagTemplate() {
-            var template = "";
-            template += "<span class=\"tg-tag\" style=\"width: 30px; height:30px;background:red;border-radius: 50%;text-align:center;z-index: 90000;box-shadow:0 0 1px 20px green;cursor: pointer;display: block;  \">";
-            template += "    TAG";
-            template += "<\/span>";
+            // var template = "";
+            // template += "<span class=\"tg-tag\" style=\"width: 30px; height:30px;background:red;border-radius: 50%;text-align:center;z-index: 90000;box-shadow:0 0 1px 20px green;cursor: pointer;display: block;  \">";
+            // template += "    TAG";
+            // template += "<\/span>";
+             
+            var template = '<img src="http://extremeli.trendi.guru/static/images/logo.svg">';
 
             return template;
         }
@@ -129,7 +137,7 @@
             } catch (e) {
 
             }
-        };
+        }
 
         init();
     }
@@ -137,9 +145,12 @@
 
 
     function init() {
-        log('init injector');
+        log('init tg injector');
+        //var imagesForPagePromise = $.getJSON('https://extremeli.trendi.guru/api/images', {pageUrl: window.location.href});
+        //var suspectedImageUrls = '';
+        var imageRegionObjects = [];
         imageRegions.forEach(function(imageRegion) {
-            new ImagesRegion(imageRegion);
+            imageRegionObjects.push(new ImagesRegion(imageRegion));
         });
     }
 
